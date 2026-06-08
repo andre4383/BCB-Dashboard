@@ -12,8 +12,9 @@ def queda_saques():
     pix_date = pd.to_datetime('2020-11-01')
     pix_valor= 1082571.13 
 
-    plt.annotate(text='Pandemia',xy=(pand_date,pand_valor))
-    plt.annotate(text='Lançamento do Pix',xy=(pix_date,pix_valor))
+    plt.axvline(x= pand_date,color='red',linestyle= '--', label='Inicio da Pandemia')
+    plt.axvline(x= pix_date,color='green',linestyle= '--', label='lancamento do pix')
+    plt.legend()
     plt.title("Queda de Saques no Brasil(2015-2026)")
     plt.ylabel("Quantidade em milhares")
     plt.xlabel("Trimestre")
@@ -39,3 +40,5 @@ def ted_cres():
     plt.xlabel("Trimestre")
     plt.grid()
     plt.show()
+
+queda_saques()

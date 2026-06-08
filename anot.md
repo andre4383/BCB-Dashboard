@@ -13,3 +13,13 @@
 >>>3 - Grafico de Linhas
 >>>>4- Criar 5 partes do grafico significando cada parte desse periodo de 10 anos
 3. *? Ainda falta ?*
+
+## COMO RODAR:
+
+1. Clone o repo
+2. Crie o ambiente virtual: `python -m venv venv`
+3. Ative: `venv\Scripts\activate`
+4. Instale dependências: `pip install -r requirements.txt`
+5. Crie o `.env` com POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+6. Suba o banco: `docker compose up -d`
+7. Rode o pipeline: `python bronze.py` depois `python silver.py`
