@@ -27,3 +27,9 @@
 7. Rode o pipeline: `python bronze.py` depois `python silver.py`
 8. Inicie a API (Backend): `uvicorn api.api:app --reload` (Mantenha esse terminal aberto)
 9. Em um NOVO terminal, vá para a pasta frontend (`cd frontend`) e inicie o site: `npm run dev`
+
+## RODANDO NO DIA A DIA (Quando já tem tudo instalado e o banco pronto):
+
+1. **Suba o banco de dados (se estiver desligado):** `docker compose up -d`
+2. **Ligue a API:** Abra um terminal, ative o venv (`source venv/bin/activate` ou `venv\Scripts\activate`) e rode `uvicorn api.api:app --reload`
+3. **Ligue o Site:** Abra outro terminal, vá para a pasta frontend (`cd frontend`) e rode `npm run dev`
