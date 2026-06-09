@@ -15,7 +15,7 @@ def queda_saques():
     plt.axvline(x= pand_date,color='red',linestyle= '--', label='Inicio da Pandemia')
     plt.axvline(x= pix_date,color='green',linestyle= '--', label='lancamento do pix')
     plt.legend()
-    plt.title("Queda de Saques no Brasil(2015-2026)")
+    plt.title("Queda de Saques no Brasil(2015-2025)")
     plt.ylabel("Quantidade em milhares")
     plt.xlabel("Trimestre")
     plt.show()
@@ -42,3 +42,5 @@ def ted_cres():
     plt.show()
 
 queda_saques()
+volume_total_transacoes()
+ted_cres()

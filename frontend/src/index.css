@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-color: #fafafa;
+  --surface-color: #ffffff;
+  --surface-border: #f1f5f9;
+  --text-primary: #1e293b;
+  --text-secondary: #94a3b8;
+  --accent: #1e293b;
+  --accent-light: #f8fafc;
+  --green: #22c55e;
+  --red: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-weight: 400;
+}
+
+/* Layout */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 72px;
+  background-color: var(--surface-color);
+  border-right: 1px solid var(--surface-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 2rem;
+  z-index: 10;
+}
+
+.sidebar-logo {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.sidebar-icon {
+  color: var(--text-secondary);
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar-icon:hover {
+  color: var(--text-primary);
+}
+
+.sidebar-icon.active {
+  color: var(--text-primary);
+  background-color: var(--accent-light);
+}
+
+/* Main Content area */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background-color: var(--bg-color);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  width: 280px;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.icon-btn {
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+.icon-btn:hover {
+  color: var(--text-primary);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--text-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  padding: 0 3rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Welcome Section */
+.welcome-section h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.welcome-section p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Report Section */
+.report-section {
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.report-section h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.report-paragraph {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 900px;
+}
+
+.chart-container {
+  margin-top: 1.5rem;
+}
+
+/* Charts Grid */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.chart-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.chart-title-group h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.chart-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Utils */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: var(--text-primary);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
