@@ -17,8 +17,10 @@
 ## COMO RODAR:
 
 1. Clone o repo
-2. Crie o ambiente virtual: `python -m venv venv`
-3. Ative: `venv\Scripts\activate`
+2. Crie o ambiente virtual: `python -m venv venv` (ou `python3 -m venv venv` no Mac)
+3. Ative o ambiente virtual:
+   - **Windows:** `venv\Scripts\activate`
+   - **Mac/Linux:** `source venv/bin/activate`
 4. Instale dependências: `pip install -r requirements.txt`
 5. Crie o `.env` com POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
 6. Suba o banco: `docker compose up -d`

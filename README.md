@@ -1,31 +1,40 @@
 # BCB Dashboard - Guia Rápido
 
-Este é o guia passo a passo para você rodar o seu projeto localmente no seu Mac.
+Este é o guia passo a passo para você rodar o seu projeto localmente, compatível com **Windows** e **Mac/Linux**.
 O projeto é dividido em três partes: Banco de Dados, Backend (Python/FastAPI) e Frontend (React).
 
 ## Pré-requisito: Banco de Dados
-Antes de rodar o código, certifique-se de que o seu **PostgreSQL** está rodando no seu computador (seja pelo aplicativo nativo do Postgres ou via Docker).
+Antes de rodar o código, certifique-se de que o seu **PostgreSQL** está rodando no seu computador (via Docker).
+
+```bash
+docker compose up -d
+```
 
 ---
 
 ## Passo a Passo para Iniciar o Projeto
 
-Sempre que você for trabalhar no projeto, precisará ligar os dois motores abrindo **duas abas** no seu terminal.
+Sempre que você for trabalhar no projeto, precisará ligar os dois motores abrindo **dois terminais**.
 
-### Aba 1: Ligar o Backend (API)
+### Terminal 1: Ligar o Backend (API)
 1. Abra o terminal na pasta raiz do projeto (`BCB-Dashboard`).
 2. Ative o ambiente virtual do Python:
-   ```bash
-   source venv/bin/activate
-   ```
+   - **No Windows:** 
+     ```cmd
+     venv\Scripts\activate
+     ```
+   - **No Mac/Linux:** 
+     ```bash
+     source venv/bin/activate
+     ```
 3. Ligue o servidor da API:
-   ```bash
-   uvicorn api.api:app --reload
-   ```
-   *Deixe essa aba quieta. A API já estará funcionando e enviando os dados do banco.*
+   - **No Windows:** `python -m uvicorn api.api:app --reload`
+   - **No Mac/Linux:** `uvicorn api.api:app --reload`
+   
+   *Deixe esse terminal aberto. A API estará funcionando na porta 8000.*
 
-### Aba 2: Ligar o Frontend (React)
-1. Abra uma **nova aba** no terminal (`Cmd + T` no Mac).
+### Terminal 2: Ligar o Frontend (React)
+1. Abra um **novo terminal**.
 2. Entre na pasta do site:
    ```bash
    cd frontend
@@ -39,10 +48,17 @@ Sempre que você for trabalhar no projeto, precisará ligar os dois motores abri
 ---
 
 ## Como Acessar e Usar o Site
-Com as duas abas do terminal rodando (com os comandos travados nelas), basta abrir o seu navegador de internet e acessar:
+Com os dois terminais rodando (API e Frontend), abra o seu navegador de internet e acesse:
 
 👉 **http://localhost:5173/**
 
+## Preparando os Dados (Apenas 1ª vez ou Atualização)
+Se o banco de dados estiver vazio, popule-o rodando (com o ambiente virtual ativado):
+```bash
+python bronze.py
+python silver.py
+```
+
 ## Como Desligar Tudo
-Quando você terminar seu trabalho e quiser fechar o projeto, basta ir nas duas abas do terminal e pressionar:
-**`Ctrl + C`** (Isso "mata" o processo em andamento).
+Quando terminar seu trabalho e quiser fechar o projeto, basta ir nos dois terminais e pressionar:
+**`Ctrl + C`** (Isso "mata" os processos em andamento).
