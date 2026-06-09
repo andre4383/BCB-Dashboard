@@ -23,3 +23,5 @@
 5. Crie o `.env` com POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
 6. Suba o banco: `docker compose up -d`
 7. Rode o pipeline: `python bronze.py` depois `python silver.py`
+8. Inicie a API (Backend): `uvicorn api.api:app --reload` (Mantenha esse terminal aberto)
+9. Em um NOVO terminal, vá para a pasta frontend (`cd frontend`) e inicie o site: `npm run dev`

@@ -10,7 +10,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/dados')
+    fetch('http://127.0.0.1:8000/api/dados')
       .then((res) => res.json())
       .then((jsonData) => {
         setData(jsonData);
@@ -66,7 +66,7 @@ function App() {
               O gráfico apresenta o crescimento contínuo do volume financeiro total transacionado eletronicamente (somatório de Pix, TED, Cartões e Boletos) por trimestre, evidenciando o aumento do fluxo financeiro em canais digitais ao longo do período analisado.
             </p>
             <div className="chart-container" style={{ width: '100%', height: 350 }}>
-              <ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                   <XAxis dataKey="trimestre" stroke="#cbd5e1" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
@@ -84,10 +84,10 @@ function App() {
           <div className="report-section">
             <h3>Declínio de Saques em Espécie</h3>
             <p className="report-paragraph">
-              A quantidade de saques apresenta uma tendência histórica de queda. Os dados demonstram a redução progressiva da utilização de cédulas físicas e a sua substituição por alternativas eletrônicas.
+              A quantidade de saques apresenta uma tendência histórica de queda. A análise divide o período em 5 partes: (1) Era Tradicional pré-2017, (2) Crescimento dos Bancos Digitais, (3) Choque da Pandemia, (4) Lançamento do Pix e (5) Consolidação do Pagamento Instantâneo.
             </p>
             <div className="chart-container" style={{ width: '100%', height: 350 }}>
-              <ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 20, right: 10, left: 10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                   <XAxis dataKey="trimestre" stroke="#cbd5e1" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
@@ -95,8 +95,10 @@ function App() {
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#ffffff', borderRadius: '8px', border: '1px solid #f1f5f9', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}
                   />
-                  <ReferenceLine x="2020-03-01" stroke="red" strokeDasharray="3 3" label={{ value: 'Início da Pandemia', position: 'insideTopLeft', fill: 'red', fontSize: 11 }} />
-                  <ReferenceLine x="2020-11-01" stroke="green" strokeDasharray="3 3" label={{ value: 'Lançamento do Pix', position: 'insideTopRight', fill: 'green', fontSize: 11 }} />
+                  <ReferenceLine x="2017-03-31" stroke="#8b5cf6" strokeDasharray="3 3" label={{ value: 'Bancos Digitais', position: 'insideTopLeft', fill: '#8b5cf6', fontSize: 11 }} />
+                  <ReferenceLine x="2020-03-31" stroke="#ef4444" strokeDasharray="3 3" label={{ value: 'Pandemia', position: 'insideTopLeft', fill: '#ef4444', fontSize: 11 }} />
+                  <ReferenceLine x="2020-12-31" stroke="#10b981" strokeDasharray="3 3" label={{ value: 'Lançamento Pix', position: 'insideTopLeft', fill: '#10b981', fontSize: 11 }} />
+                  <ReferenceLine x="2022-03-31" stroke="#f59e0b" strokeDasharray="3 3" label={{ value: 'Consolidação', position: 'insideTopLeft', fill: '#f59e0b', fontSize: 11 }} />
                   <Line type="monotone" dataKey="qtdSaques" name="Qtd. de Saques" stroke="#94a3b8" strokeWidth={2} dot={false} activeDot={{ r: 4, fill: '#94a3b8' }} />
                 </LineChart>
               </ResponsiveContainer>
@@ -110,7 +112,7 @@ function App() {
               A Transferência Eletrônica Disponível (TED) apresentou períodos de expansão, porém demonstra estagnação em seu volume financeiro após a introdução de novos meios de pagamento.
             </p>
             <div className="chart-container" style={{ width: '100%', height: 350 }}>
-              <ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 20, right: 10, left: 10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                   <XAxis dataKey="trimestre" stroke="#cbd5e1" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
