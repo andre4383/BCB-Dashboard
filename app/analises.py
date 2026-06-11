@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 
 df = silver_data_extract()
 
+
 def queda_saques():
     # df['quantidadeSaques'] * 1000000
     plt.plot(df['datatrimestre'],df['quantidadeSaques'])
