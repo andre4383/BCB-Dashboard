@@ -8,7 +8,7 @@ def gold_transform():
     engine = create_engine("postgresql://postgres:postgres@localhost:5432/bcb_dashboard")
     
     #queda de saques
-    gold_saques = df[['datatrimestre', 'quantidadeSaques']].copy()
+    gold_saques = df[['datatrimestre', 'quantidadeSaques', 'valorSaques']].copy()
     gold_saques['variacao_porc'] = df['quantidadeSaques'].pct_change() * 100
     gold_saques['variacao_porc'] = gold_saques['variacao_porc'].fillna(0)
     gold_saques['variacao_porc'] = gold_saques['variacao_porc'].round(2)
