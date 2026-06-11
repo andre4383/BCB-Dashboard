@@ -6,7 +6,7 @@ from silver import silver_data_extract
 st.set_page_config(page_title="Dashboard BCB", layout="wide")
 
 st.title("Dashboard do Banco Central do Brasil")
-st.markdown("Análise da evolução dos meios de pagamento no Brasil ao longo da última década (2015 - 2025).")
+st.markdown("Análise da evolução dos meios de pagamento no Brasil ao longo da última década (2015 - 2026).")
 
 @st.cache_data
 def load_data():
