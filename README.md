@@ -1,6 +1,10 @@
 # Dashboard BCB (Banco Central do Brasil)
 
-Este projeto realiza a extração, tratamento e visualização de dados abertos do Banco Central do Brasil focados nos Meios de Pagamento. A arquitetura utiliza a metodologia medalhão (Bronze, Silver e Gold), banco de dados em PostgreSQL (via Docker) e uma interface de relatórios interativa desenvolvida em Streamlit.
+Este projeto realiza a extração, tratamento e visualização de dados abertos do Banco Central do Brasil focados nos Meios de Pagamento. A arquitetura utiliza a metodologia medalhão (Bronze, Prata e Ouro).
+
+## Design e Prototipagem
+
+[Figma Slides - BCB Dashboard](https://figma.com/slides/Uz3u0lGGpMpm8guuqokZoX)
 
 ## Passo a Passo para Rodar o Projeto
 
@@ -51,7 +55,6 @@ Passo 2: Tratar e limpar os dados (Camada Silver):
 python pipeline/silver.py
 ```
 
-```
 Passo 3: Agregar e transformar os dados para visualização (Camada Gold):
 ```bash
 python pipeline/gold.py
