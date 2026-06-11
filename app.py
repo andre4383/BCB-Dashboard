@@ -46,8 +46,7 @@ st.header("Queda de Saques no Brasil (2015-2026)")
 st.write("Análise mostrando como o uso de dinheiro em espécie vem caindo, especialmente afetado pela pandemia e pelo lançamento do Pix.")
 
 graphic_saques = px.line(gold_saques, x='datatrimestre', y='quantidadeSaques',
-                          labels={'quantidadeSaques': 'Montante (R$ bilhões)', 'datatrimestre': 'Trimestre'})
-graphic_saques.update_layout(yaxis=dict(tickformat=',.0f'))
+                          labels={'quantidadeSaques': 'Quantidade de Saques', 'datatrimestre': 'Trimestre'})
 graphic_saques.add_vline(x='2020-03-01', line_dash='dash', line_color='red', annotation_text='Pandemia')
 graphic_saques.add_vline(x='2020-11-01', line_dash='dash', line_color='green', annotation_text='Lançamento do Pix')
 
@@ -86,7 +85,11 @@ st.divider()
 st.header("O momento em que o Pix superou o Débito")
 st.write("O Pix cresceu tão rapidamente que superou o cartão de débito em volume transacionado.")
 
-crossover = gold_pix_deb[gold_pix_deb['valorPix'] >= gold_pix_deb['valorCartaoDebito']]['datatrimestre'].min()
+
+
+crossover = gold_pix_deb[
+    gold_pix_deb['valorPix'] >= gold_pix_deb['valorCartaoDebito']
+]['datatrimestre'].min()
 
 graphic_pix_deb = px.line(gold_pix_deb, x='datatrimestre',
                             y=['valorPix', 'valorCartaoDebito'],
@@ -98,21 +101,27 @@ if pd.notna(crossover):
 st.plotly_chart(graphic_pix_deb, key="pix_deb")
 st.info("**O que isso significa:** Em poucos anos após o lançamento, o Pix superou o cartão de débito — um meio de pagamento consolidado há décadas — mostrando a velocidade de adoção sem precedentes.")
 
-# --- 5. Market Share 2015 vs 2025 ---
+# --- 5. Market Share: primeiro vs último trimestre ---
 st.divider()
-st.header("Market Share: 2015 vs 2025")
+
+datas      = pd.to_datetime(gold_ms['datatrimestre'].sort_values().unique())
+data_ini   = datas[0]
+data_fim   = datas[-1]
+label_ini  = f"{data_ini.year} — Q{(data_ini.month - 1) // 3 + 1}"
+label_fim  = f"{data_fim.year} — Q{(data_fim.month - 1) // 3 + 1}"
+
+st.header(f"Market Share: {label_ini} vs {label_fim}")
 st.write("Como o mix de meios de pagamento transformou-se em uma década.")
 
-datas   = gold_ms['datatrimestre'].sort_values().unique()
-ms_2015 = gold_ms[gold_ms['datatrimestre'] == datas[0]]
-ms_2025 = gold_ms[gold_ms['datatrimestre'] == datas[-1]]
+ms_ini = gold_ms[gold_ms['datatrimestre'] == datas[0]]
+ms_fim = gold_ms[gold_ms['datatrimestre'] == datas[-1]]
 
 col_a, col_b = st.columns(2)
 with col_a:
-    st.subheader("2015 — Q1")
-    st.plotly_chart(px.pie(ms_2015, names='meio', values='percentual', hole=0.4), key="ms_2015")
+    st.subheader(label_ini)
+    st.plotly_chart(px.pie(ms_ini, names='meio', values='percentual', hole=0.4), key="ms_ini")
 with col_b:
-    st.subheader("2025 — Q4")
-    st.plotly_chart(px.pie(ms_2025, names='meio', values='percentual', hole=0.4), key="ms_2025")
+    st.subheader(label_fim)
+    st.plotly_chart(px.pie(ms_fim, names='meio', values='percentual', hole=0.4), key="ms_fim")
 
 st.info("**O que isso significa:** Em 2015, Pix não existia. Em 2025, ele domina o mix. Este donut mostra a revolução dos meios de pagamento no Brasil em uma única imagem.")

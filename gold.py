@@ -4,12 +4,9 @@ import pandas as pd
 
 def gold_transform():
     df = silver_data_extract()
+
     engine = create_engine("postgresql://postgres:postgres@localhost:5432/bcb_dashboard")
     
-    # volume
-    gold_volume = df[['datatrimestre']].copy()
-    gold_volume['volume_total'] = df.filter(like='valor').sum(axis=1)
-    gold_volume.to_sql('gold_volume_total', engine, if_exists='replace', index=False)
     #queda de saques
     gold_saques = df[['datatrimestre', 'quantidadeSaques']].copy()
     gold_saques['variacao_porc'] = df['quantidadeSaques'].pct_change() * 100
@@ -32,10 +29,10 @@ def gold_transform():
     gold_pix_deb = df[['datatrimestre', 'valorPix', 'valorCartaoDebito']].copy()
     gold_pix_deb.to_sql('gold_pix_vs_debito', engine, if_exists='replace', index=False)
 
-    # market share (primeiro e ultimo trimestre)
+    # market share (primeiro e ultimo trimestre) - exclui valorSaques (nao eh meio de pagamento)
     trimestres_alvo = [df['datatrimestre'].min(), df['datatrimestre'].max()]
     df_ms = df[df['datatrimestre'].isin(trimestres_alvo)].copy()
-    valor_cols = [c for c in df_ms.columns if c.startswith('valor')]
+    valor_cols = [c for c in df_ms.columns if c.startswith('valor') and c != 'valorSaques']
     rows = []
     for _, row in df_ms.iterrows():
         total = sum(row[c] for c in valor_cols)
@@ -50,4 +47,5 @@ def gold_transform():
     gold_ms.to_sql('gold_market_share', engine, if_exists='replace', index=False)
 
 
-gold_transform()
+if __name__ == '__main__':
+    gold_transform()
