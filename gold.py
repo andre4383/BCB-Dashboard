@@ -9,7 +9,6 @@ def gold_transform():
     # volume
     gold_volume = df[['datatrimestre']].copy()
     gold_volume['volume_total'] = df.filter(like='valor').sum(axis=1)
-    gold_volume['volume_total'] = gold_volume['volume_total'] * 1000000
     gold_volume.to_sql('gold_volume_total', engine, if_exists='replace', index=False)
     #queda de saques
     gold_saques = df[['datatrimestre', 'quantidadeSaques']].copy()
@@ -24,7 +23,31 @@ def gold_transform():
         lambda x:'pos_pix' if x >= pd.to_datetime('2020-11-01') else 'pre_pix'
     )
     gold_ted_cres.to_sql('gold_ted_cres', engine, if_exists='replace', index=False)
-    
-    
-gold_transform()    
-    
+
+    # transferencias (TED vs DOC vs Pix)
+    gold_transf = df[['datatrimestre', 'valorTED', 'valorDOC', 'valorPix']].copy()
+    gold_transf.to_sql('gold_transferencias', engine, if_exists='replace', index=False)
+
+    # pix vs cartao debito
+    gold_pix_deb = df[['datatrimestre', 'valorPix', 'valorCartaoDebito']].copy()
+    gold_pix_deb.to_sql('gold_pix_vs_debito', engine, if_exists='replace', index=False)
+
+    # market share (primeiro e ultimo trimestre)
+    trimestres_alvo = [df['datatrimestre'].min(), df['datatrimestre'].max()]
+    df_ms = df[df['datatrimestre'].isin(trimestres_alvo)].copy()
+    valor_cols = [c for c in df_ms.columns if c.startswith('valor')]
+    rows = []
+    for _, row in df_ms.iterrows():
+        total = sum(row[c] for c in valor_cols)
+        for c in valor_cols:
+            rows.append({
+                'datatrimestre': row['datatrimestre'],
+                'meio': c.replace('valor', ''),
+                'valor': row[c],
+                'percentual': round(row[c] / total * 100, 2) if total else 0
+            })
+    gold_ms = pd.DataFrame(rows)
+    gold_ms.to_sql('gold_market_share', engine, if_exists='replace', index=False)
+
+
+gold_transform()
