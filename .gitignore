@@ -1,0 +1,23 @@
+# Ambientes Virtuais
+venv/
+env/
+.env
+
+# Arquivos e pastas do Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Arquivos do sistema operacional (Mac/Windows)
+.DS_Store
+Thumbs.db
+
+# Ferramentas e IDEs
+.vscode/
+.idea/
+*.swp
+
+# Docker / DB (opcional, caso monte volumes locais)
+pgdata/
