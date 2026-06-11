@@ -5,8 +5,10 @@ import matplotlib.pyplot as plt
 df = silver_data_extract()
 
 def queda_saques():
+    # df['quantidadeSaques'] * 1000000
     plt.plot(df['datatrimestre'],df['quantidadeSaques'])
     plt.grid(True)
+    print(df['quantidadeSaques'])
     pand_date = pd.to_datetime('2020-03-01')# 2020-Q2
     # pand_valor= 1033408.05 
     pix_date = pd.to_datetime('2020-11-01')
@@ -41,6 +43,6 @@ def ted_cres():
     plt.grid()
     plt.show()
 
-volume_total_transacoes()
 queda_saques()
-ted_cres()
+# volume_total_transacoes()
+# ted_cres()

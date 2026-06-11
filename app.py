@@ -42,17 +42,13 @@ col3.metric("Volume Total", f"{cresc_vol}%", delta=f"{cresc_vol}%")
 st.header("Queda de Saques no Brasil (2015-2026)")
 st.write("Análise mostrando como o uso de dinheiro em espécie vem caindo, especialmente afetado pela pandemia e pelo lançamento do Pix.")
 
-primeiro = gold_saques['quantidadeSaques'].iloc[0]  
-ultimo = gold_saques['quantidadeSaques'].iloc[-1]     
-queda = ((ultimo - primeiro) / primeiro * 100).round(1)
-
-col1.metric("Queda de Saques", f"{queda}%")
-
-graphic_saques = px.line(gold_saques, x='datatrimestre', y='quantidadeSaques')
+graphic_saques = px.line(gold_saques,x='datatrimestre',y='quantidadeSaques',)
 graphic_saques.add_vline(x='2020-03-01', line_dash='dash', line_color='red', annotation_text='Pandemia')
 graphic_saques.add_vline(x='2020-11-01', line_dash='dash', line_color='green', annotation_text='Lançamento do Pix')
 
+
 st.plotly_chart(graphic_saques)
+st.dataframe(gold_saques, use_container_width=True,hide_index=True)
 
 st.info("**O que isso significa:** Este gráfico ilustra como as pessoas estão sacando menos dinheiro físico. Note que as quedas mais bruscas coincidem com o início da pandemia (março/2020) e com o lançamento do Pix (novembro/2020).")
 st.divider()

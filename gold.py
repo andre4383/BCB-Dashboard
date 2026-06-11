@@ -9,6 +9,7 @@ def gold_transform():
     # volume
     gold_volume = df[['datatrimestre']].copy()
     gold_volume['volume_total'] = df.filter(like='valor').sum(axis=1)
+    gold_volume['volume_total'] = gold_volume['volume_total'] * 1000000
     gold_volume.to_sql('gold_volume_total', engine, if_exists='replace', index=False)
     #queda de saques
     gold_saques = df[['datatrimestre', 'quantidadeSaques']].copy()
